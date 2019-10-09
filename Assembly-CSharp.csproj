@@ -58,6 +58,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BoardManager.cs" />
      <Compile Include="Assets\Scripts\Controller.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Tile.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>F:/jopa/unity/Test Tiles Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

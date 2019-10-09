@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     private static Tile previousSelected;
     private bool isSelected;
     Vector3 pos;
-    float speed = 2.0f;
+    float speed = 3.0f;
     private Color startColor;
     private Renderer rend;
+    private bool isActive;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +16,7 @@ public class Tile : MonoBehaviour
         pos = transform.position;
         isSelected = false;
         rend = GetComponent<Renderer>();
+        isActive = true;
     }
 
     // Update is called once per frame
@@ -70,7 +69,6 @@ public class Tile : MonoBehaviour
         startColor = Color.red;
         previousSelected = this;
         Debug.Log("Select");
-
     }
 
     private void DeselectTile()
@@ -84,31 +82,45 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log(name);
-        if (isSelected)
+        if (isActive)
         {
-            DeselectTile();
-        }
-        else
-        {
-            if (previousSelected == null) {
-                SelectTile();
+            Debug.Log(name);
+            if (isSelected)
+            {
+                DeselectTile();
             }
             else
             {
-                previousSelected.DeselectTile();
-                SelectTile();
+                if (previousSelected == null)
+                {
+                    SelectTile();
+                }
+                else
+                {
+                    previousSelected.DeselectTile();
+                    SelectTile();
+                }
             }
         }
     }
-    
+
     void OnMouseEnter()
     {
         startColor = GetComponent<Renderer>().material.color;
         GetComponent<Renderer>().material.color = Color.green;
     }
+
     void OnMouseExit()
     {
         GetComponent<Renderer>().material.color = startColor;
+    }
+
+    public void Deactivate()
+    {
+        if (isActive)
+        {
+           // if (isSelected) DeselectTile();
+            isActive = false;
+        }
     }
 }
